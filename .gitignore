@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal
+
+# Logs and traces
+*.log
+*.trace
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Build outputs and coverage
+build/
+dist/
+out/
+coverage/
+.next/
+
+# Package-manager artifacts
+package-lock.json
+*.bun
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+
+# Docker overrides
+compose.override.yaml
+docker-compose.override.yml
