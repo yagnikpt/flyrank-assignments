@@ -8,7 +8,7 @@ function createApp() {
 
 	app.use(
 		openapi({
-			provider: "swagger-ui",
+			// provider: "swagger-ui",
 			path: "/docs",
 			specPath: "/openapi.json",
 			documentation: {
