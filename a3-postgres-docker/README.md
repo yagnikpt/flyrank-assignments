@@ -1,4 +1,4 @@
-# BE-04: PostgreSQL Task API with Docker
+# A3: PostgreSQL Task API with Docker
 
 This project upgrades the Assignment 2 task API from SQLite to PostgreSQL. It runs the API and database together through Docker Compose, and PostgreSQL data survives restarts through a named Docker volume.
 

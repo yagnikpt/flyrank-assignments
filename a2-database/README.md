@@ -1,4 +1,4 @@
-# BE-02: SQLite Task CRUD API
+# A2: SQLite Task CRUD API
 
 A Bun/Elysia task API that keeps the Assignment 1 CRUD interface while replacing in-memory storage with SQLite persistence.
 

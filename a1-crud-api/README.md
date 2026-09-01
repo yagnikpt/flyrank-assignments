@@ -1,4 +1,4 @@
-# BE-01: Task CRUD API
+# A1: Task CRUD API
 
 A small REST API for managing tasks, built with [Elysia](https://elysiajs.com/) and Bun. This project uses an in-memory array, so its data resets whenever the server restarts.
 
