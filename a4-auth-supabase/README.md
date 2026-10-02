@@ -30,14 +30,19 @@ Open `http://localhost:3000/docs` for Swagger UI.
 
 ## API reference
 
-| Method | Endpoint                   | Auth required | Success                   |
-| ------ | -------------------------- | ------------- | ------------------------- |
-| `POST` | `/api/auth/signup`         | No            | `201`                     |
-| `POST` | `/api/auth/login`          | No            | `200` with `access_token` |
-| `POST` | `/api/auth/logout`         | Bearer JWT    | `204`                     |
-| `GET`  | `/api/public/info`         | No            | `200`                     |
-| `GET`  | `/api/protected/profile`   | Bearer JWT    | `200`                     |
-| `GET`  | `/api/protected/dashboard` | Bearer JWT    | `200`                     |
+| Method   | Endpoint                   | Auth required | Success                   |
+| -------- | -------------------------- | ------------- | ------------------------- |
+| `POST`   | `/api/auth/signup`         | No            | `201`                     |
+| `POST`   | `/api/auth/login`          | No            | `200` with `access_token` |
+| `POST`   | `/api/auth/logout`         | Bearer JWT    | `204`                     |
+| `GET`    | `/api/public/info`         | No            | `200`                     |
+| `GET`    | `/api/protected/profile`   | Bearer JWT    | `200`                     |
+| `GET`    | `/api/protected/dashboard` | Bearer JWT    | `200`                     |
+| `GET`    | `/api/tasks`               | Bearer JWT    | `200`                     |
+| `POST`   | `/api/tasks`               | Bearer JWT    | `201`                     |
+| `GET`    | `/api/tasks/:id`           | Bearer JWT    | `200`                     |
+| `PUT`    | `/api/tasks/:id`           | Bearer JWT    | `200`                     |
+| `DELETE` | `/api/tasks/:id`           | Bearer JWT    | `204`                     |
 
 ### Authentication flow
 
@@ -51,6 +56,12 @@ Open `http://localhost:3000/docs` for Swagger UI.
    ```
 
 The reusable guard in [`lib/auth.ts`](lib/auth.ts) rejects missing bearer tokens with `401 { "error": "Access token required" }`. It verifies supplied tokens through `supabase.auth.getUser(token)` and rejects invalid or expired tokens with `401 { "error": "Invalid or expired token" }`.
+
+## User-owned tasks
+
+Before using the task feature, run [`supabase/schema.sql`](supabase/schema.sql) once in your Supabase Dashboard **SQL Editor**. It creates `public.tasks` and enables Row Level Security (RLS), so each user can only read, create, update, and delete rows they own.
+
+After browser sign-in, visit `/protected` to manage your own tasks. The same CRUD feature is also available through the bearer-authenticated `/api/tasks` endpoints.
 
 ## Swagger UI
 

@@ -7,6 +7,95 @@ export function GET() {
 		openapi: "3.0.3",
 		info: { title: "Supabase Auth API", version: "1.0.0" },
 		paths: {
+			"/api/tasks": {
+				get: {
+					summary: "List the authenticated user's tasks",
+					security: bearerAuth,
+					responses: {
+						"200": { description: "Tasks" },
+						"401": { description: "Unauthorized" },
+					},
+				},
+				post: {
+					summary: "Create a task for the authenticated user",
+					security: bearerAuth,
+					requestBody: {
+						required: true,
+						content: {
+							"application/json": {
+								schema: { $ref: "#/components/schemas/TaskInput" },
+							},
+						},
+					},
+					responses: {
+						"201": { description: "Task created" },
+						"400": { description: "Invalid input" },
+						"401": { description: "Unauthorized" },
+					},
+				},
+			},
+			"/api/tasks/{id}": {
+				get: {
+					summary: "Get one of the authenticated user's tasks",
+					security: bearerAuth,
+					parameters: [
+						{
+							name: "id",
+							in: "path",
+							required: true,
+							schema: { type: "integer" },
+						},
+					],
+					responses: {
+						"200": { description: "Task" },
+						"401": { description: "Unauthorized" },
+						"404": { description: "Not found" },
+					},
+				},
+				put: {
+					summary: "Update one of the authenticated user's tasks",
+					security: bearerAuth,
+					parameters: [
+						{
+							name: "id",
+							in: "path",
+							required: true,
+							schema: { type: "integer" },
+						},
+					],
+					requestBody: {
+						required: true,
+						content: {
+							"application/json": {
+								schema: { $ref: "#/components/schemas/TaskInput" },
+							},
+						},
+					},
+					responses: {
+						"200": { description: "Task updated" },
+						"400": { description: "Invalid input" },
+						"401": { description: "Unauthorized" },
+						"404": { description: "Not found" },
+					},
+				},
+				delete: {
+					summary: "Delete one of the authenticated user's tasks",
+					security: bearerAuth,
+					parameters: [
+						{
+							name: "id",
+							in: "path",
+							required: true,
+							schema: { type: "integer" },
+						},
+					],
+					responses: {
+						"204": { description: "Task deleted" },
+						"401": { description: "Unauthorized" },
+						"404": { description: "Not found" },
+					},
+				},
+			},
 			"/api/auth/signup": {
 				post: {
 					summary: "Create an account",
@@ -90,6 +179,13 @@ export function GET() {
 					properties: {
 						email: { type: "string", format: "email" },
 						password: { type: "string", format: "password" },
+					},
+				},
+				TaskInput: {
+					type: "object",
+					properties: {
+						title: { type: "string" },
+						done: { type: "boolean" },
 					},
 				},
 			},

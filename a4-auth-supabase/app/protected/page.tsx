@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { TaskManager } from "@/components/task-manager";
 import { createClient } from "@/lib/supabase/server";
 
 async function DashboardContent() {
@@ -38,6 +39,8 @@ async function DashboardContent() {
 					</p>
 				</div>
 			</section>
+
+			<TaskManager />
 
 			<section className="rounded-xl border border-border bg-card p-6">
 				<h2 className="text-xl font-semibold">Test the protected API</h2>
